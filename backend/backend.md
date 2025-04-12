@@ -69,8 +69,8 @@ npx prisma studio
 
 ## 🔄 Useful Scripts
 
-| Command                  | Description                           |
-|--------------------------|---------------------------------------|
+| Command                  | Description                          |
+|--------------------------|--------------------------------------|
 | `pnpm install`           | Install dependencies                 |
 | `npx prisma db push`     | Sync Prisma schema to SQLite DB      |
 | `npx prisma generate`    | Generate Prisma client               |
