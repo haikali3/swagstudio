@@ -1,9 +1,14 @@
+# Ignore the node_modules directory, which contains dependencies installed via npm or yarn.
 node_modules
 
+# Ignore the .env file, which typically contains environment variables and sensitive information.
 .env
 
+# Ignore the generated/prisma/ directory, which may contain auto-generated Prisma files.
 generated/prisma/
 
+# Ignore the .DS_Store file, a macOS system file used to store folder attributes.
 .DS_Store
 
+# Ignore the dev.db file, which is likely a local development database file.
 dev.db
