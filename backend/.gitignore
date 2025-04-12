@@ -10,5 +10,6 @@ generated/prisma/
 # Ignore the .DS_Store file, a macOS system file used to store folder attributes.
 .DS_Store
 
-# Ignore the dev.db file, which is likely a local development database file.
+# Prisma generated files & local DB
 dev.db
+dev.db-journal

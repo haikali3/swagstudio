@@ -29,7 +29,15 @@ Replace `your_username` and `your_password` with your actual credentials for Pro
 
 Edit `prisma/schema.prisma` to include your models (e.g., `Product`).
 
-### 4. Push Prisma Schema to SQLite DB
+### 4. Initialize and Sync SQLite Database
+
+#### 4a. Create Database & Apply Migration
+
+Use Prisma Migrate to create the database tables:
+
+```bash
+npx prisma migrate dev --name init
+```
 
 Run the following command to create the SQLite database file and apply the schema:
 
@@ -54,7 +62,7 @@ npx prisma generate
 Run the following command to fetch product data from the PromoStandards API and store it in your local database:
 
 ```bash
-pnpm tsx src/index.ts
+pnpm dev
 ```
 
 ### Optional: Open Prisma Studio
@@ -74,5 +82,5 @@ npx prisma studio
 | `pnpm install`           | Install dependencies                 |
 | `npx prisma db push`     | Sync Prisma schema to SQLite DB      |
 | `npx prisma generate`    | Generate Prisma client               |
-| `pnpm tsx src/index.ts`  | Run the sync script                  |
+| `pnpm dev`               | Run the sync script                  |
 | `npx prisma studio`      | Open the Prisma DB UI                |
