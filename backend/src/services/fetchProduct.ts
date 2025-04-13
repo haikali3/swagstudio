@@ -21,6 +21,10 @@ const dummyProducts = [
 ];
 
 export async function fetchAndStoreProducts() {
+  // Call PromoStandards Product API
+  // Parse name, image, imprint location
+  // Save to SQLite using Prisma
+
   console.log('Fetching product data from PromoStandards...');
 
   // Simulate fetching
