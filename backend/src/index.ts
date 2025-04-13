@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
-import { fetchAndStoreProducts } from './services/fetchProduct';
+import { getProductsFromPromo } from './services/getProductsFromPromo';
 import express from 'express';
 
 dotenv.config();
 
 (async () => {
   try {
-    await fetchAndStoreProducts();
+    await getProductsFromPromo();
     console.log('🚀 Product sync complete!');
-    
+
     const app = express();
     const PORT = process.env.PORT || 3000;
 
