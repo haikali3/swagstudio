@@ -1,11 +1,11 @@
 // index.ts
 import dotenv from 'dotenv';
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction, Application } from 'express';
 import axios from 'axios';
 
 dotenv.config();
 
-const app = express();
+const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
 // Simple in-memory cache
@@ -16,7 +16,10 @@ const CACHE_DURATION = 2 * 60 * 60 * 1000;
 
 app.get(
   '/supplier/:supplierCode/medias/:productId',
-  async (req: Request<{ supplierCode: string; productId: string }>, res: Response) => {
+  async (
+    req: Request<{ supplierCode: string; productId: string }, any, any, any, any>,
+    res: Response
+  ): Promise<void> => {
     const { supplierCode, productId } = req.params;
     const cacheKey = `${supplierCode}-${productId}`;
 
@@ -24,7 +27,8 @@ app.get(
 
     // Return cached version if valid
     if (mediaCache[cacheKey] && mediaCache[cacheKey].expiry > now) {
-      return res.json(mediaCache[cacheKey].data);
+      res.json(mediaCache[cacheKey].data);
+      return;
     }
 
     try {
