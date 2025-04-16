@@ -33,27 +33,34 @@ export const Home = () => {
     img.src = imageUrl;
   }, [imageUrl]);
 
-  // Handle drawing on overlay canvas
+  // Handle drawing on overlay canvas with proper scaling
   useEffect(() => {
     const canvas = overlayCanvasRef.current;
     if (!canvas || !isAnnotating) return;
     const ctx = canvas.getContext("2d")!;
 
     const onMouseDown = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (e.clientX - rect.left) * scaleX;
+      const y = (e.clientY - rect.top) * scaleY;
+
       setIsDrawing(true);
-      const { left, top } = canvas.getBoundingClientRect();
-      const x = e.clientX - left;
-      const y = e.clientY - top;
       setStartPos({ x, y });
       setRectCoords({ x, y, w: 0, h: 0 });
     };
+
     const onMouseMove = (e: MouseEvent) => {
       if (!isDrawing) return;
-      const { left, top } = canvas.getBoundingClientRect();
-      const x = e.clientX - left;
-      const y = e.clientY - top;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (e.clientX - rect.left) * scaleX;
+      const y = (e.clientY - rect.top) * scaleY;
       const w = x - startPos.x;
       const h = y - startPos.y;
+
       setRectCoords({ x: startPos.x, y: startPos.y, w, h });
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,11 +68,13 @@ export const Home = () => {
       ctx.lineWidth = 2;
       ctx.strokeRect(startPos.x, startPos.y, w, h);
     };
+
     const onMouseUp = () => setIsDrawing(false);
 
     canvas.addEventListener("mousedown", onMouseDown);
     canvas.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
+
     return () => {
       canvas.removeEventListener("mousedown", onMouseDown);
       canvas.removeEventListener("mousemove", onMouseMove);
