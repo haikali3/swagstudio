@@ -13,8 +13,8 @@ console.log(PS_RESTFUL_X_API_KEY)
 // Simple in-memory cache
 const mediaCache: Record<string, { data: any; expiry: number }> = {};
 
-// Duration to cache in ms (2 hours)
-const CACHE_DURATION = 3 * 60 * 60 * 1000;
+// Duration to cache in ms (24 hours)
+const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
 app.get(
   '/supplier/:supplierCode/medias/:productId',
