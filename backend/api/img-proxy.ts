@@ -19,4 +19,4 @@ app.get("/proxy-image", async (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log("Proxy running on :3001"));
+app.listen(3000, () => console.log("Proxy running on :3000"));
