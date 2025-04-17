@@ -1,6 +1,8 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, HarmBlockThreshold, HarmCategory, Modality } from "@google/genai";
+import * as fs from "node:fs";
 import axios from "axios";
 
+// UNDERSTAND IMAGE FROM GEMINI 2.0-FLASH
 export async function captionImageFromUrl(imageUrl: string, prompt: string) {
   const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
@@ -23,5 +25,3 @@ export async function captionImageFromUrl(imageUrl: string, prompt: string) {
   const textResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
   return textResponse;
 }
-
-// UNDERSTAND IMAGE FROM GEMINI 2.0-FLASH

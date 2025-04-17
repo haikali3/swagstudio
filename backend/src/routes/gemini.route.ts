@@ -1,5 +1,6 @@
-import { Router, Request, Response } from "express";
-import { captionImageFromUrl } from "../services/gemini.service";
+import { Router } from "express";
+import { captionImageFromUrl } from "../services/caption-img-url.service";
+import { generateImageFromPrompt } from "../services/gen-img-prompt.service"
 
 const router = Router();
 
@@ -17,6 +18,23 @@ router.post("/caption-image", async (req: any, res: any) => {
   } catch (err: any) {
     console.error("❌ Gemini captioning error:", err);
     res.status(500).json({ message: "Gemini captioning failed", error: err.message });
+  }
+});
+
+//POST /generate-image
+router.post("/generate-image", async (req: any, res: any) => {
+  const { prompt } = req.body;
+
+  if (!prompt) {
+    return res.status(400).json({ message: "Missing 'prompt' in request body" });
+  }
+
+  try {
+    const result = await generateImageFromPrompt(prompt);
+    res.status(200).json(result);
+  } catch (err: any) {
+    console.error("❌ Gemini image generation error:", err);
+    res.status(500).json({ message: "Image generation failed", error: err.message });
   }
 });
 
