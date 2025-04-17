@@ -23,3 +23,5 @@ export async function captionImageFromUrl(imageUrl: string, prompt: string) {
   const textResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini";
   return textResponse;
 }
+
+// UNDERSTAND IMAGE FROM GEMINI 2.0-FLASH
