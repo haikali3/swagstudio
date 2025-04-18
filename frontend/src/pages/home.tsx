@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useEditImage } from "@/hooks/use-edit-Image";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
-import { SmilePlus } from "lucide-react";
+import { Loader, SmilePlus } from "lucide-react";
 
 export const Home = () => {
   const imageCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,11 +12,34 @@ export const Home = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [rectCoords, setRectCoords] = useState({ x: 0, y: 0, w: 0, h: 0 });
+  const [editedImageUrl, setEditedImageUrl] = useState<string | null>(null);
 
-  const imageUrl =
+  const originalImageUrl =
     "http://localhost:3001/proxy-image?url=https://www.hitpromo.net/imageManager/show/1035_group.jpg";
 
-  // Load image onto base canvas
+  const editImageMutation = useEditImage(
+    (blobUrl) => {
+      if (editedImageUrl) URL.revokeObjectURL(editedImageUrl); // cleanup
+      setEditedImageUrl(blobUrl);
+    },
+    (error) => {
+      console.error("❌ Image generation failed", error);
+      alert("Failed to generate smiley face");
+    }
+  );
+
+  const handleAddSmiley = () => {
+    const cleanImageUrl = originalImageUrl.replace(
+      "http://localhost:3001/proxy-image?url=",
+      ""
+    );
+    editImageMutation.mutate({
+      imageUrl: cleanImageUrl,
+      prompt: "Replace the logo in the red box with a smiley face",
+    });
+  };
+
+  // Load image into canvas (edited or original)
   useEffect(() => {
     const imgCanvas = imageCanvasRef.current;
     const ovlCanvas = overlayCanvasRef.current;
@@ -30,10 +54,10 @@ export const Home = () => {
       });
       imgCanvas.getContext("2d")!.drawImage(img, 0, 0);
     };
-    img.src = imageUrl;
-  }, [imageUrl]);
+    img.src = editedImageUrl || originalImageUrl;
+  }, [originalImageUrl, editedImageUrl]);
 
-  // Handle drawing on overlay canvas with proper scaling
+  // Drawing logic on overlay canvas
   useEffect(() => {
     const canvas = overlayCanvasRef.current;
     if (!canvas || !isAnnotating) return;
@@ -82,7 +106,6 @@ export const Home = () => {
     };
   }, [isAnnotating, isDrawing, startPos]);
 
-  // Send coordinates to backend
   const sendCoords = async () => {
     if (!rectCoords.w || !rectCoords.h) return;
     try {
@@ -125,13 +148,24 @@ export const Home = () => {
             {isAnnotating && rectCoords.w && rectCoords.h && (
               <Button onClick={sendCoords}>Save Box</Button>
             )}
-            <Button>
-              <SmilePlus className="w-4 h-4" />
-              Add Smiley Face
+            <Button
+              onClick={handleAddSmiley}
+              disabled={editImageMutation.isPending}
+            >
+              {editImageMutation.isPending ? (
+                <>
+                  <Loader className="w-4 h-4 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <SmilePlus className="w-4 h-4" />
+                  Add Smiley Face
+                </>
+              )}
             </Button>
           </div>
         </div>
-        {/* Future product cards can be added here in the same grid */}
       </div>
     </div>
   );
