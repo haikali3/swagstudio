@@ -35,7 +35,7 @@ export const Home = () => {
     );
     editImageMutation.mutate({
       imageUrl: cleanImageUrl,
-      prompt: "Replace the logo in the red box with a smiley face",
+      prompt: "Replace the logo on the cap with a smiley face",
     });
   };
 
