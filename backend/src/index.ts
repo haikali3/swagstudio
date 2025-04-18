@@ -14,9 +14,9 @@ app.use(
 );
 
 
+app.use(express.json());
 app.use(mediaRoute);
 app.use(proxyRoute);
-app.use(express.json());
 app.use(geminiRoute);
 
 app.listen(config.port, () => {
