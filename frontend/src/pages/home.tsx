@@ -14,8 +14,6 @@ export const Home = () => {
   const [rectCoords, setRectCoords] = useState({ x: 0, y: 0, w: 0, h: 0 });
   const [editedImageUrl, setEditedImageUrl] = useState<string | null>(null);
 
-  console.log(console.log(import.meta.env.VITE_API_BASE_URL));
-
   const originalImageUrl = `${
     import.meta.env.VITE_API_BASE_URL
   }/proxy-image?url=https://www.hitpromo.net/imageManager/show/1035_group.jpg`;
