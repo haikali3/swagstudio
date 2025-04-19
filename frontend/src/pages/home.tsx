@@ -14,8 +14,9 @@ export const Home = () => {
   const [rectCoords, setRectCoords] = useState({ x: 0, y: 0, w: 0, h: 0 });
   const [editedImageUrl, setEditedImageUrl] = useState<string | null>(null);
 
-  const originalImageUrl =
-    "http://localhost:3001/proxy-image?url=https://www.hitpromo.net/imageManager/show/1035_group.jpg";
+  const originalImageUrl = `${
+    import.meta.env.VITE_API_BASE_URL
+  }/proxy-image?url=https://www.hitpromo.net/imageManager/show/1035_group.jpg`;
 
   const editImageMutation = useEditImage(
     (blobUrl) => {
@@ -30,7 +31,7 @@ export const Home = () => {
 
   const handleAddSmiley = () => {
     const cleanImageUrl = originalImageUrl.replace(
-      "http://localhost:3001/proxy-image?url=",
+      `${import.meta.env.VITE_API_BASE_URL}/proxy-image?url=`,
       ""
     );
     editImageMutation.mutate({
@@ -109,13 +110,16 @@ export const Home = () => {
   const sendCoords = async () => {
     if (!rectCoords.w || !rectCoords.h) return;
     try {
-      await axios.post("http://localhost:3001/api/imprint-location", {
-        productId: "1035",
-        x: rectCoords.x,
-        y: rectCoords.y,
-        width: rectCoords.w,
-        height: rectCoords.h,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/imprint-location`,
+        {
+          productId: "1035",
+          x: rectCoords.x,
+          y: rectCoords.y,
+          width: rectCoords.w,
+          height: rectCoords.h,
+        }
+      );
       alert("Coordinates sent!");
       setIsAnnotating(false);
     } catch (err) {
