@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { editImageWithGemini } from "../../services/edit-img.service"
+import { editImageWithGemini } from "../../services/image/edit-img.service"
 
 const router = Router();
 

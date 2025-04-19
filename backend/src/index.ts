@@ -16,22 +16,19 @@ app.use(express.json());
 // leaves the media route exactly as defined: 
 //   GET /supplier/:supplierCode/medias/:productId
 app.use(mediaRoute);
-
-// proxy-image stays at /proxy-image
 app.use(proxyRoute);
 
 // groups your three image routers as:
+app.use("/image", imageRoutes);
 //   POST /image/caption-image
 //   POST /image/generate-image
 //   POST /image/edit-image
-app.use("/image", imageRoutes);
 
 // 3) Catch‑all error handler
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.error("❌ Unhandled error:", err);
   res.status(500).json({ message: "Internal server error" });
 };
-
 app.use(errorHandler);
 
 app.listen(config.port, () =>

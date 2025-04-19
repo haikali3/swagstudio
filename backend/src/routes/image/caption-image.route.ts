@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { captionImageFromUrl } from "../../services/caption-img-url.service";
+import { captionImageFromUrl } from "../../services/image/caption-img-url.service";
 
 const router = Router();
 

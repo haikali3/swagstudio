@@ -12,15 +12,23 @@ datasource db {
 }
 
 model Product {
-  id             Int     @id @default(autoincrement())
-  productId      String  @unique
-  name           String?
-  description    String?
-  imprintX       Int?
-  imprintY       Int?
-  imprintWidth   Int?
-  imprintHeight  Int?
-  imageUrl       String?
-  inventory      Int?
-  createdAt      DateTime @default(now())
+  id        Int            @id @default(autoincrement())
+  productId String         @unique
+  createdAt DateTime       @default(now())
+  images    ProductImage[]
+}
+
+model ProductImage {
+  id            Int      @id @default(autoincrement())
+  product       Product  @relation(fields: [productId], references: [id])
+  productId     Int
+  url           String
+  imprintX      Int?
+  imprintY      Int?
+  imprintWidth  Int?
+  imprintHeight Int?
+  classTypeName String?
+  createdAt     DateTime @default(now())
+
+  @@unique([productId, url], name: "productId_url")
 }

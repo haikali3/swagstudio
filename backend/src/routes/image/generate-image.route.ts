@@ -1,4 +1,4 @@
-import { generateImageFromPrompt } from "../../services/generate-img-prompt.service";
+import { generateImageFromPrompt } from "../../services/image/generate-img-prompt.service";
 import { Router } from "express";
 
 const router = Router();
