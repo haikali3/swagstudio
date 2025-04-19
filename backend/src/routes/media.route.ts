@@ -13,8 +13,8 @@ router.get(
     const cacheKey = `${supplierCode}-${productId}`;
 
     // 1) try cache
-    const cached = getCache(cacheKey);
-    if (cached) return res.json(cached);
+    const cachedData = getCache(cacheKey);
+    if (cachedData) return res.json(cachedData);
 
     if (!config.psApiKey) {
       return res.status(500).json({ message: "API key is missing" });
@@ -27,9 +27,9 @@ router.get(
       // 3) extract array
       const mediaArr = mediaData.MediaContentArray
         .MediaContent as Array<{
-        url: string;
-        ClassTypeArray: { ClassType: Array<{ classTypeName: string }> };
-      }>;
+          url: string;
+          ClassTypeArray: { ClassType: Array<{ classTypeName: string }> };
+        }>;
 
       // 4) save all URLs + classTypeNames
       await saveAllProductImages(productId, mediaArr);
