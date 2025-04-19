@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function editImage({ imageUrl, prompt }: { imageUrl: string; prompt: string }): Promise<string> {
   const response = await axios.post(
-    "http://localhost:3001/edit-image",
+    `${import.meta.env.VITE_API_BASE_URL}/image/edit-image`,
     {
       imageUrl,
       prompt,
