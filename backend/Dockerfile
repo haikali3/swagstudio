@@ -12,7 +12,8 @@ WORKDIR /app
 COPY --from=BUILDER /app/package.json ./
 COPY --from=BUILDER /app/node_modules ./node_modules
 COPY --from=BUILDER /app/dist ./dist
-COPY --from=BUILDER /app/prisma ./prisma
+# COPY --from=BUILDER /app/prisma/generated /app/dist/generated
+# COPY --from=BUILDER /app/prisma ./prisma
 ENV GEMINI_KEY your_gemini_key_here
 EXPOSE 3000
 CMD ["node", "dist/src/index.js"]
