@@ -15,4 +15,4 @@ COPY --from=BUILDER /app/dist ./dist
 COPY --from=BUILDER /app/prisma ./prisma
 ENV GEMINI_KEY your_gemini_key_here
 EXPOSE 3000
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]

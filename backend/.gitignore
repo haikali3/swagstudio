@@ -13,3 +13,6 @@ generated/prisma/
 # Prisma generated files & local DB
 dev.db
 dev.db-journal
+
+# Ignore the dist directory, which contains compiled or built files.
+dist/
