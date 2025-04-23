@@ -1,6 +1,4 @@
-
 # frontend/Dockerfile
-
 FROM node:22-slim AS builder
 ENV PNPM_HOME="/pnpm" PATH="$PNPM_HOME:$PATH"
 RUN corepack enable

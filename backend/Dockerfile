@@ -1,3 +1,4 @@
+# backend/Dockerfile
 FROM node:22-alpine AS BUILDER
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
