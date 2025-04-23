@@ -11,8 +11,6 @@ services:
       - ./backend/.env:/app/.env
     environment:
       GEMINI_KEY: your_gemini_key_here
-    # env_file:
-    # - ./backend/.env
 
   frontend:
     build:
