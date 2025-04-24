@@ -19,7 +19,7 @@ app.use(mediaRoute);
 app.use(proxyRoute);
 
 app.get("/", (req, res) => {
-  res.send("hello friend!");
+  res.send("hello buddy v1.3!");
 });
 
 // groups your three image routers as:
@@ -35,6 +35,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 };
 app.use(errorHandler);
 
-app.listen(config.port, () =>
-  console.log(`🚀 Server running on ${config.backendUrl}`)
-);
+app.listen(config.port, () => {
+  console.log(`🚀 Server running on ${config.backendUrl}`);
+  console.log("🔥 FRONTEND_URL from .env:", process.env.FRONTEND_URL);
+  console.log("🌐 Testing backend URL:", config.backendUrl);
+});
