@@ -14,5 +14,5 @@ COPY --from=BUILDER /app/package.json ./
 COPY --from=BUILDER /app/node_modules ./node_modules
 COPY --from=BUILDER /app/dist ./dist
 ENV GEMINI_KEY your_gemini_key_here
-EXPOSE 3000
+EXPOSE 3001
 CMD ["node", "dist/index.js"]
