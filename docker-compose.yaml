@@ -6,7 +6,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '3001:3001'
     volumes:
       - ./backend/prisma/dev.db:/app/prisma/dev.db
       - ./backend/.env:/app/.env
