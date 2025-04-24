@@ -1,0 +1,21 @@
+# docker-compose.yaml
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./backend/prisma/dev.db:/app/prisma/dev.db
+      - ./backend/.env:/app/.env
+    environment:
+      GEMINI_KEY: your_gemini_key_here
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '5173:80'
