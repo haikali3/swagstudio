@@ -147,7 +147,7 @@ export const Home = () => {
             />
           </div>
           <div className="flex items-center gap-2 mt-2">
-            <Button onClick={() => setIsAnnotating((f) => !f)}>
+            <Button onClick={() => setIsAnnotating((f) => !f)} disabled>
               <SmilePlus className="w-4 h-4" />
               {isAnnotating ? "Cancel Draw" : "Draw Imprint Box"}
             </Button>
