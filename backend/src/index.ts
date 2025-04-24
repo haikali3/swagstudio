@@ -18,6 +18,10 @@ app.use(express.json());
 app.use(mediaRoute);
 app.use(proxyRoute);
 
+app.get("/", (req, res) => {
+  res.send("hello friend!");
+});
+
 // groups your three image routers as:
 app.use("/image", imageRoutes);
 //   POST /image/caption-image
@@ -32,5 +36,5 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 app.use(errorHandler);
 
 app.listen(config.port, () =>
-  console.log(`🚀 Server running on http://localhost:${config.port}`)
+  console.log(`🚀 Server running on ${config.backendUrl}`)
 );

@@ -3,6 +3,7 @@ node_modules
 
 # Ignore the .env file, which typically contains environment variables and sensitive information.
 .env
+.env.development
 
 # Ignore the generated/prisma/ directory, which may contain auto-generated Prisma files.
 generated/prisma/
