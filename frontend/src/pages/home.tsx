@@ -14,6 +14,8 @@ export const Home = () => {
   const [rectCoords, setRectCoords] = useState({ x: 0, y: 0, w: 0, h: 0 });
   const [editedImageUrl, setEditedImageUrl] = useState<string | null>(null);
 
+  console.log("🚀 VITE_API_BASE_URL", import.meta.env.VITE_API_BASE_URL);
+
   const originalImageUrl = `${
     import.meta.env.VITE_API_BASE_URL
   }/proxy-image?url=https://www.hitpromo.net/imageManager/show/1035_group.jpg`;
@@ -145,7 +147,7 @@ export const Home = () => {
             />
           </div>
           <div className="flex items-center gap-2 mt-2">
-            <Button onClick={() => setIsAnnotating((f) => !f)}>
+            <Button onClick={() => setIsAnnotating((f) => !f)} disabled>
               <SmilePlus className="w-4 h-4" />
               {isAnnotating ? "Cancel Draw" : "Draw Imprint Box"}
             </Button>

@@ -1,5 +1,5 @@
 dev.db
-.env
+# .env
 .git
 dist
 node_modules
